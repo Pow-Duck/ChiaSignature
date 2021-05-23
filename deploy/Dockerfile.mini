@@ -1,0 +1,32 @@
+FROM python:3.8-alpine
+
+WORKDIR /code
+
+COPY . .
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+    && apk update && apk add \
+        libuuid \
+        pcre \
+        mailcap \
+        gcc \
+        libc-dev \
+        linux-headers \
+        pcre-dev \
+    && apk add --update --no-cache mariadb-connector-c-dev \
+    && apk add --no-cache --virtual .build-deps \
+		mariadb-dev \
+		gcc \
+		musl-dev \
+		make \
+		libc-dev \
+		linux-headers \
+		pcre-dev \
+    && pip install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt \
+    && apk del \
+        gcc \
+        libc-dev \
+        linux-headers \
+    && rm -rf /tmp/* \
+    && apk del .build-deps
+
+CMD ["uvicorn", "src.main:app", "--host", "'0.0.0.0'", "--port", "8181"]

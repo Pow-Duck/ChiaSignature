@@ -1,4 +1,4 @@
-from plot import *
+from src.plot import *
 
 if __name__ == '__main__':
     f = "FarmerPublicID"

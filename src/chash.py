@@ -1,4 +1,4 @@
-from sized_bytes import bytes32
+from src.sized_bytes import bytes32
 import blspy
 
 

@@ -1,6 +1,6 @@
 from blspy import G1Element
-from sized_bytes import bytes32
-from chash import std_hash
+from src.sized_bytes import bytes32
+from src.chash import std_hash
 
 
 class ProofOfSpace():
