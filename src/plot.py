@@ -10,7 +10,7 @@ from src.plot_tools import stream_plot_info_pk
 def create_plots(public_key: str, pool_key: str) -> (str, str):
     farmer_public_key: G1Element = G1Element.from_bytes(bytes.fromhex(public_key))
     pool_public_key: Optional[G1Element] = G1Element.from_bytes(bytes.fromhex(pool_key))
-    # 置随机数种子
+    # Set random number seed
     sk = AugSchemeMPL.key_gen(token_bytes(32))
     # The plot public key is the combination of the harvester and farmer keys
     plot_public_key = ProofOfSpace.generate_plot_public_key(master_sk_to_local_sk(sk).get_g1(), farmer_public_key)
